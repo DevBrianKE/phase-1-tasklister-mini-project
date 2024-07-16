@@ -1,19 +1,35 @@
-//wait for the DOM to be fully loaded before running the script
+// Wait for the DOM to be fully loaded before running the script
 document.addEventListener("DOMContentLoaded", () => {
-  // select the form element
-  const form = document.getElementById('create-task-form')
-  //add a submit event listener to the form
+  // Select the form element
+  const form = document.getElementById('create-task-form');
+
+  // Add a submit event listener to the form
   form.addEventListener('submit', (event) => {
-    event.preventDefault() //prevent the default form submission
-    
-    //select the input element and get its value
-    const taskInput = document.getElementById('new-task-description')
-    const taskText = taskInput.value
+      event.preventDefault(); // Prevent the default form submission
 
-    //call a function to add the task to the list
-    addTaskList(taskText)
+      // Select the input element and get its value
+      const taskInput = document.getElementById('new-task-description');
+      const taskText = taskInput.value;
 
-    //clear the input field after adding the task
-    taskInput.value = ''
-  })
+      // Call a function to add the task to the list
+      addTaskToList(taskText);
+
+      // Clear the input field after adding the task
+      taskInput.value = '';
+  });
 });
+
+// Function to add task to the list
+function addTaskToList(taskText) {
+  // Select the task list element
+  const taskList = document.getElementById('tasks');
+  
+  // Create a new list item element
+  const taskItem = document.createElement('li');
+  
+  // Set the text content of the list item to the task text
+  taskItem.textContent = taskText;
+  
+  // Append the list item to the task list
+  taskList.appendChild(taskItem);
+}
