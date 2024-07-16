@@ -19,17 +19,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Function to add task to the list
 function addTaskToList(taskText) {
-  // Select the task list element
+  // Get the task list (ul) where tasks will be appended
   const taskList = document.getElementById('tasks');
-  
-  // Create a new list item element
+
+  // Create a new list item (li) to hold the task
   const taskItem = document.createElement('li');
-  
-  // Set the text content of the list item to the task text
-  taskItem.textContent = taskText;
-  
-  // Append the list item to the task list
+  taskItem.textContent = taskText; // Set the text content of the list item to the task description
+
+  // Create a delete button for each task
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete'; // Set the button text to 'Delete'
+
+  // Add an event listener to the delete button to remove the task item when clicked
+  deleteButton.addEventListener('click', () => {
+      taskList.removeChild(taskItem); // Remove the task item from the list
+  });
+
+  // Append the delete button to the task item
+  taskItem.appendChild(deleteButton);
+
+  // Append the task item to the task list (ul)
   taskList.appendChild(taskItem);
 }
