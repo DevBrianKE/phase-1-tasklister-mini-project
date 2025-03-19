@@ -1,18 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   const taskForm = document.getElementById("create-task-form");
-  const taskList = document.getElementById("tasks"); // Select the UL element
+  const taskList = document.getElementById("tasks");
 
   taskForm.addEventListener("submit", function(event) {
     event.preventDefault();
-
+    
     const taskInput = document.getElementById("new-task-description").value;
+    
+    if (taskInput.trim() !== "") {
+      const taskItem = document.createElement("li");
+      taskItem.textContent = taskInput;
 
-    if (taskInput.trim() !== "") { // Ensure it's not empty
-      const taskItem = document.createElement("li"); // Create an <li> element
-      taskItem.textContent = taskInput; // Set text content
+      // Create delete button
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "❌";
+      deleteBtn.style.marginLeft = "10px";
+      deleteBtn.addEventListener("click", function() {
+        taskItem.remove(); // Remove the task when delete button is clicked
+      });
 
-      taskList.appendChild(taskItem); // Append the task to the list
-      taskForm.reset(); // Clear the input field after submission
+      taskItem.appendChild(deleteBtn); // Attach button to task
+      taskList.appendChild(taskItem);
+      
+      taskForm.reset();
     }
   });
 });
